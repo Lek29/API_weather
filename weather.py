@@ -11,7 +11,7 @@ def main():
         'n': '',
         'q': '',
         'T':'',
-        'M':''
+        'M':'',
     }
     weather_cherepovec = f'https://wttr.in/{variable_cherepovec}'
     weather_sheremetivo = f'https://wttr.in/{variable_moscov_airport_sheremetivo}'
