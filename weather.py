@@ -1,10 +1,19 @@
 import requests
 
 
+def create_url(city):
+    return f'https://wttr.in/{city}'
+
+
+def get_weather(parametrs, func):
+    response = requests.get(func, params=parametrs)
+    #response.raise_for_status()
+    return response
+
+
 def main():
-    variable_london = 'Лондон'
-    variable_moscov_airport_sheremetivo = 'SVO'
-    variable_cherepovec = 'Череповец'
+    cities = ['Лондон', 'SVO', 'Череповец']
+
     charcteristic_windows = {
         'lang': 'ru',
         'n': '',
@@ -13,20 +22,10 @@ def main():
         'M': '',
     }
 
-    weather_cherepovec = f'https://wttr.in/{variable_cherepovec}'
-    weather_sheremetivo = f'https://wttr.in/{variable_moscov_airport_sheremetivo}'
-    weather_london = f'https://wttr.in/{variable_london}'
-
-    response_cherepovec = requests.get(weather_cherepovec, params=charcteristic_windows)
-    response_sheremetivo = requests.get(weather_sheremetivo, params=charcteristic_windows)
-    response_london = requests.get(weather_london, params=charcteristic_windows)
-
-    response_cherepovec.raise_for_status()
-    print(response_cherepovec.text)
-    response_sheremetivo.raise_for_status()
-    print(response_sheremetivo.text)
-    response_london.raise_for_status()
-    print(response_london.text)
+    for city in cities:
+        url_city = create_url(city)
+        weather_in_city = get_weather(charcteristic_windows, url_city)
+        print(weather_in_city.text)
 
 
 if __name__ == '__main__':
