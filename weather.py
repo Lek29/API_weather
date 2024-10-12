@@ -1,13 +1,9 @@
 import requests
 
 
-def create_url(city):
-    return f'https://wttr.in/{city}'
-
-
-def get_weather(parametrs, func):
-    response = requests.get(func, params=parametrs)
-    #response.raise_for_status()
+def get_weather(parametrs, url_city):
+    response = requests.get(url_city, params=parametrs)
+    response.raise_for_status()
     return response
 
 
@@ -23,7 +19,7 @@ def main():
     }
 
     for city in cities:
-        url_city = create_url(city)
+        url_city = f'https://wttr.in/{city}'
         weather_in_city = get_weather(charcteristic_windows, url_city)
         print(weather_in_city.text)
 
